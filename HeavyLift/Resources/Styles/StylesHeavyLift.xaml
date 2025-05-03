@@ -28,7 +28,6 @@
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
     </Style>
-    
 
     <Style x:Key="Header" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
@@ -48,6 +47,11 @@
     <Style x:Key="Small" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
         <Setter Property="FontSize" Value="10"/>
+    </Style>
+
+    <Style x:Key="Warning" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource DangerColor}"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
 
 </ResourceDictionary>
