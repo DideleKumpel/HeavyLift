@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-
+using HeavyLift.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +11,8 @@ namespace HeavyLift.ViewModels
 {
     internal partial class LoginViewModel : ObservableObject
     {
+        private readonly AuthentitacionService _authentitacionService;
+
         [ObservableProperty]
         public string _emailInput;
         [ObservableProperty]
@@ -33,6 +35,13 @@ namespace HeavyLift.ViewModels
                 ErrorMessage = "Please fill in all fields.\n";
                 return;
             }
+
+            try
+            {
+                await _authentitacionService.Login(EmailInput, PasswordInput);
+            }
+            catch { }
+
         }
         [RelayCommand]
         public void SwitchToRegisterPage()
@@ -43,6 +52,7 @@ namespace HeavyLift.ViewModels
         public LoginViewModel()
         {
             ErrorMessage = "";
+            _authentitacionService = new AuthentitacionService();
         }
 
         private bool IsValidEmail(string email)
