@@ -1,10 +1,12 @@
+using HeavyLift.ViewModels;
+
 namespace HeavyLift.Views;
 
 public partial class LoginView : ContentPage
 {
-	public LoginView()
+	public LoginView(LoginViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new ViewModels.LoginViewModel();
+		BindingContext = vm;
     }
 }

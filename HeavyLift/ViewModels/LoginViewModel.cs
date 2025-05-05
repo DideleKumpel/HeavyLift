@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HeavyLift.ViewModels
 {
-    internal partial class LoginViewModel : ObservableObject
+    public partial class LoginViewModel : ObservableObject
     {
         private readonly AuthentitacionService _authentitacionService;
 
@@ -20,7 +20,6 @@ namespace HeavyLift.ViewModels
         [ObservableProperty]
         public string _errorMessage;
 
-        public string Tekscior { get; set; }
 
         [RelayCommand]
         public async Task Login()
@@ -49,10 +48,10 @@ namespace HeavyLift.ViewModels
             
         }
 
-        public LoginViewModel()
+        public LoginViewModel(AuthentitacionService authservice)
         {
             ErrorMessage = "";
-            _authentitacionService = new AuthentitacionService();
+            _authentitacionService = authservice;
         }
 
         private bool IsValidEmail(string email)

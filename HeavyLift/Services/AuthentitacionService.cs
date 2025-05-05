@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 
 namespace HeavyLift.Services
 {
-    internal class AuthentitacionService
+    public class AuthentitacionService
     {
         private readonly HttpClient _httpClient;
-        private string _apiBaseUrl = "https://7c13-84-40-218-81.ngrok-free.app";
-        public AuthentitacionService()
+        public AuthentitacionService(HttpClient httpclient)
         {
-            _httpClient = new HttpClient();
-            _httpClient.BaseAddress = new Uri(_apiBaseUrl);
-            _httpClient.DefaultRequestHeaders.Accept.Clear();
-            _httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            _httpClient.Timeout = TimeSpan.FromSeconds(30);
+            _httpClient = httpclient;
         }
 
         public async Task<(bool success, string message)> Login(string email, string password)
