@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HeavyLift.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace HeavyLift.ViewModels
 {
     public partial class LoginViewModel : ObservableObject
     {
+        private readonly IServiceProvider _serviceProvider;
         private readonly AuthentitacionService _authentitacionService;
 
         [ObservableProperty]
@@ -37,9 +39,19 @@ namespace HeavyLift.ViewModels
 
             try
             {
-                await _authentitacionService.Login(EmailInput, PasswordInput);
+                var result = await _authentitacionService.GetAuthorizationAsync(EmailInput, PasswordInput);
+                if (!result.success)
+                {
+                    ErrorMessage = result.message;
+                    PasswordInput = "";
+                    return;
+                }
+                Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
             }
-            catch { }
+            catch {
+                ErrorMessage = "Error occured while loggin try again later.";
+                return;
+            }
 
         }
         [RelayCommand]
@@ -48,10 +60,11 @@ namespace HeavyLift.ViewModels
             
         }
 
-        public LoginViewModel(AuthentitacionService authservice)
+        public LoginViewModel(AuthentitacionService authservice, IServiceProvider serviceProvider)
         {
             ErrorMessage = "";
             _authentitacionService = authservice;
+            _serviceProvider = serviceProvider;
         }
 
         private bool IsValidEmail(string email)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
@@ -15,17 +16,19 @@ namespace HeavyLift.Services
             _httpClient = httpclient;
         }
 
-        public async Task<(bool success, string message)> Login(string email, string password)
+        public async Task<(bool success, string message)> GetAuthorizationAsync(string email, string password)
         {
             try
             {
-                var response = await _httpClient.PostAsJsonAsync("/api/Authorization/login", new { Email = email, Password = password });
+                var response = await _httpClient.PostAsJsonAsync("/api/Authorization/GetAuthorization", new { Email = email, Password = password });
+
                 if (response.IsSuccessStatusCode)
                 {
                     var result = await response.Content.ReadFromJsonAsync<LoginResult>();
                     if (result != null && result.Token != null)
                     {
                         await SecureStorage.SetAsync("AuthTokenKey" , result.Token);
+                        _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Barer", result.Token);
                         return (true, "Login successful");
                     }
                     else
@@ -40,7 +43,6 @@ namespace HeavyLift.Services
             }
             catch
             { 
-
                 return (false, "Login failed: An error occurred while connecting to the server");
             }
         }

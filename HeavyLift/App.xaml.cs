@@ -14,7 +14,6 @@ namespace HeavyLift
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            // Pobierz LoginView przez DI (razem z jego ViewModel)
             var loginView = _serviceProvider.GetRequiredService<LoginView>();
             return new Window(loginView);
         }
