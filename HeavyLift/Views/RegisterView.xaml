@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeavyLift.Views.RegisterView"
              xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
-             x:DataType="viewmodel:LoginViewModel"
+             x:DataType="viewmodel:RegisterViewModel"
              Title="RegisterView">
     <ScrollView VerticalOptions="Fill" Background="{StaticResource BackgroundBrush}">
     <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Fill" Padding="20" Spacing="15">
@@ -21,7 +21,7 @@
             Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
             Background="{StaticResource SecondaryBackgroundColor}">
             <Entry Placeholder="Nickname" PlaceholderColor="{StaticResource TextColor}"
-                Text="{Binding NickName}" TextColor="{StaticResource TextColor}" FontSize="16"
+                Text="{Binding NicknameInput}" TextColor="{StaticResource TextColor}" FontSize="16"
                 Keyboard="Email"
             />
         </Border>
@@ -53,9 +53,9 @@
 
         <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" />
 
-        <Button Style="{StaticResource WhiteBtn}" Text="Create account"  HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
+        <Button Style="{StaticResource WhiteBtn}" Text="Create account"  HorizontalOptions="Center" Command="{Binding RegisterAccountCommand}"/>
 
-        <Button Style="{StaticResource TextBtn}" Text="Already have an account?  Sing in" HorizontalOptions="Center"/>
+        <Button Style="{StaticResource TextBtn}" Text="Already have an account?  Sing in" HorizontalOptions="Center" Command="{Binding SwitchToLoginPanelCommand}"/>
             
     </VerticalStackLayout>
     </ScrollView>
