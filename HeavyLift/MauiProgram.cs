@@ -22,7 +22,7 @@ namespace HeavyLift
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             { 
-                var apiBaseUrl = "https://1c86-217-173-199-150.ngrok-free.app";
+                var apiBaseUrl = "https://73fd-217-173-199-150.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {

@@ -65,6 +65,25 @@ namespace HeavyLift.ViewModels
             ErrorMessage = "";
             _authentitacionService = authservice;
             _serviceProvider = serviceProvider;
+            TryToLogIn();
+        }
+
+        private async void TryToLogIn()
+        {
+            try
+            {
+                string token = await SecureStorage.GetAsync("AuthTokenKey");
+                if (string.IsNullOrEmpty(token))
+                {
+                    return;
+                }
+                bool succes = await _authentitacionService.RefreshToken(token);
+                if(succes)
+                {
+                    Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
+                }
+            }
+            catch { }
         }
 
         private bool IsValidEmail(string email)
