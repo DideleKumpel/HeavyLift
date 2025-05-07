@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeavyLift.Views.RegisterView"
+             xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
+             x:DataType="viewmodel:LoginViewModel"
+             Title="RegisterView">
+    <ScrollView VerticalOptions="Fill" Background="{StaticResource BackgroundBrush}">
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Fill" Padding="20" Spacing="15">
+        
+            <Image
+            Source="heavylift_logo.png"
+            HeightRequest="180"
+            Aspect="AspectFit"
+            Margin="0"
+            />
+        <Label Style="{StaticResource Big}"  Text="HeavyLift" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <Label Style="{StaticResource Header}" Text="Register" HorizontalOptions="Center" FontAttributes="Bold"/>
+
+        <Border Padding="5"
+            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+            Background="{StaticResource SecondaryBackgroundColor}">
+            <Entry Placeholder="Nickname" PlaceholderColor="{StaticResource TextColor}"
+                Text="{Binding NickName}" TextColor="{StaticResource TextColor}" FontSize="16"
+                Keyboard="Email"
+            />
+        </Border>
+
+        <Border Padding="5"
+            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+            Background="{StaticResource SecondaryBackgroundColor}">
+            <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
+                   Text="{Binding EmailInput}" TextColor="{StaticResource TextColor}" FontSize="16"
+                   Keyboard="Email"
+            />
+        </Border>
+
+        <Border Padding="5" 
+            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+            Background="{StaticResource SecondaryBackgroundColor}">
+            <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding PasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+            />
+        </Border>
+
+        <Border Padding="5" 
+            Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+            Background="{StaticResource SecondaryBackgroundColor}">
+            <Entry Placeholder="Repeat password" PlaceholderColor="{StaticResource TextColor}"
+            Text="{Binding PasswordRepeatInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+            />
+        </Border>
+
+        <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" />
+
+        <Button Style="{StaticResource WhiteBtn}" Text="Create account"  HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
+
+        <Button Style="{StaticResource TextBtn}" Text="Already have an account?  Sing in" HorizontalOptions="Center"/>
+            
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

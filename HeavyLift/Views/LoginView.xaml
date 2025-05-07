@@ -5,16 +5,17 @@
              xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
              x:DataType="viewmodel:LoginViewModel"
              Title="LoginView">
-    <VerticalStackLayout HorizontalOptions="Fill" Background="{StaticResource BackgroundBrush}" Padding="30">
+    <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
+        <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">
         <Image
                 Source="heavylift_logo.png"
-                HeightRequest="220"
+                HeightRequest="180"
                 Aspect="AspectFit"
                 Margin="0"
                 />
-        <Label Style="{StaticResource Big}"  Text="HeavyLift" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,30"/>
-        <Label Style="{StaticResource Header}" Text="Log in" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,20"/>
-        <Border Padding="10" Margin="0,0,0,20"
+        <Label Style="{StaticResource Big}"  Text="HeavyLift" HorizontalOptions="Center" FontAttributes="Bold"/>
+        <Label Style="{StaticResource Header}" Text="Log in" HorizontalOptions="Center" FontAttributes="Bold" />
+        <Border Padding="5" Margin="0,0,0,20"
                 Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
                 Background="{StaticResource SecondaryBackgroundColor}">
                 <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
@@ -22,8 +23,8 @@
                        Keyboard="Email"
                     />
         </Border>
-        
-        <Border Padding="10" Margin="0,0,0,20"
+
+        <Border Padding="5"
         Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
         Background="{StaticResource SecondaryBackgroundColor}">
             <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
@@ -31,13 +32,12 @@
             />
         </Border>
         
-        <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,30"/>
+        <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" />
 
-        <Button Style="{StaticResource WhiteBtn}" Text="Log in" Margin="0,0,0,20" HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
+        <Button Style="{StaticResource WhiteBtn}" Text="Log in"  HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
 
-        <Button Style="{StaticResource TextBtn}" Text="Don’t have account?  Register here." Margin="0,0,0,20" HorizontalOptions="Center"/>
+        <Button Style="{StaticResource TextBtn}" Text="Don’t have account?  Register here." HorizontalOptions="Center" Command="{Binding SwitchToRegisterPageCommand}"/>
 
-        
-
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
