@@ -1,15 +1,21 @@
-﻿namespace HeavyLift
+﻿using HeavyLift.Views;
+
+namespace HeavyLift
 {
     public partial class App : Application
     {
-        public App()
+        private readonly IServiceProvider _serviceProvider;
+
+        public App(IServiceProvider serviceProvider)
         {
+            _serviceProvider = serviceProvider;
             InitializeComponent();
         }
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
+            var loginView = _serviceProvider.GetRequiredService<LoginView>();
+            return new Window(loginView);
         }
     }
 }

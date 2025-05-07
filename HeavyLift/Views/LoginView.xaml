@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeavyLift.Views.LoginView"
+             xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
+             x:DataType="viewmodel:LoginViewModel"
+             Title="LoginView">
+    <VerticalStackLayout HorizontalOptions="Fill" Background="{StaticResource BackgroundBrush}" Padding="30">
+        <Image
+                Source="heavylift_logo.png"
+                HeightRequest="220"
+                Aspect="AspectFit"
+                Margin="0"
+                />
+        <Label Style="{StaticResource Big}"  Text="HeavyLift" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,30"/>
+        <Label Style="{StaticResource Header}" Text="Log in" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,20"/>
+        <Border Padding="10" Margin="0,0,0,20"
+                Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                Background="{StaticResource SecondaryBackgroundColor}">
+                <Entry Placeholder="E-mail" PlaceholderColor="{StaticResource TextColor}"
+                       Text="{Binding EmailInput}" TextColor="{StaticResource TextColor}" FontSize="16"
+                       Keyboard="Email"
+                    />
+        </Border>
+        
+        <Border Padding="10" Margin="0,0,0,20"
+        Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+        Background="{StaticResource SecondaryBackgroundColor}">
+            <Entry Placeholder="Password" PlaceholderColor="{StaticResource TextColor}"
+               Text="{Binding PasswordInput}" TextColor="{StaticResource TextColor}" FontSize="16" IsPassword="True"
+            />
+        </Border>
+        
+        <Label Style="{StaticResource Warning}"  Text="{Binding ErrorMessage}" HorizontalOptions="Center" FontAttributes="Bold" Margin="0,0,0,30"/>
+
+        <Button Style="{StaticResource WhiteBtn}" Text="Log in" Margin="0,0,0,20" HorizontalOptions="Center" Command="{Binding LoginCommand}"/>
+
+        <Button Style="{StaticResource TextBtn}" Text="Don’t have account?  Register here." Margin="0,0,0,20" HorizontalOptions="Center"/>
+
+        
+
+    </VerticalStackLayout>
+</ContentPage>
