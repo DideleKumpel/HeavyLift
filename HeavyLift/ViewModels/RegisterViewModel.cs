@@ -25,6 +25,8 @@ namespace HeavyLift.ViewModels
         public string _passwordRepeatInput;
         [ObservableProperty]
         public string _errorMessage;
+        [ObservableProperty]
+        public string _succesMessage;
 
         [RelayCommand]
         public void SwitchToLoginPanel()
@@ -35,6 +37,7 @@ namespace HeavyLift.ViewModels
         [RelayCommand]
         public async Task RegisterAccount()
         {
+            SuccesMessage = "";
             ErrorMessage = "";
             if( PasswordInput != PasswordRepeatInput)
             {
@@ -46,7 +49,7 @@ namespace HeavyLift.ViewModels
             if (response.success)
             {
                 ErrorMessage = response.message;
-                Application.Current.MainPage = _serviceProvider.GetRequiredService<LoginView>();
+                SuccesMessage = "Account has been created go to login page";
             }
             ErrorMessage = response.message;
         }

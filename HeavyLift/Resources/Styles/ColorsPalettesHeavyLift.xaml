@@ -9,6 +9,7 @@
     <Color x:Key="SecondaryBackgroundColor">#323232</Color>
     <Color x:Key="TertiaryBackgroundColor">#343434</Color>
     <Color x:Key="DangerColor">#FF3131</Color>
+    <Color x:Key="SuccesColor">#2EFF2E</Color>
     <Color x:Key="TextColor">#FFFFFF</Color>
     <Color x:Key="SecondaryTextColor">#000000</Color>
 
