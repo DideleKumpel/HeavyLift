@@ -59,4 +59,11 @@
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
+        <Setter Property="Shell.TabBarUnselectedColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="Shell.TitleColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
+    </Style>
+
 </ResourceDictionary>
