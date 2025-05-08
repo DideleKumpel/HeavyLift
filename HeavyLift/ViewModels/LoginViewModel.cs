@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HeavyLift.Services;
+using HeavyLift.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -57,7 +58,7 @@ namespace HeavyLift.ViewModels
         [RelayCommand]
         public void SwitchToRegisterPage()
         {
-            
+            Application.Current.MainPage = _serviceProvider.GetRequiredService<RegisterView>();
         }
 
         public LoginViewModel(AuthentitacionService authservice, IServiceProvider serviceProvider)
