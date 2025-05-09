@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeavyLift.Resources.Styles.ColorsPalettesHeavyLift">
 
-    <Color x:Key="PrimaryColor">#5E17EB</Color>
+    <Color x:Key="PrimaryColor">#8A00C4</Color>
     <Color x:Key="SecondaryColor">#FFFFFF</Color>
     <Color x:Key="BackgroundColor">#000000</Color>
     <Color x:Key="SecondaryBackgroundColor">#323232</Color>

@@ -4,6 +4,7 @@
              x:Class="HeavyLift.Views.RegisterView"
              xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
              x:DataType="viewmodel:RegisterViewModel"
+             Background="{StaticResource BackgroundColor}"
              Title="RegisterView">
     <ScrollView VerticalOptions="Fill" Background="{StaticResource BackgroundBrush}">
         <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Fill" Padding="20" Spacing="15">

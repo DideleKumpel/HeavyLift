@@ -1,12 +1,66 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?> 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeavyLift.Views.WorkoutView"
+             xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
+             xmlns:model="clr-namespace:HeavyLift.Models" 
+             x:DataType="viewmodel:WorkoutViewModel"
+             BackgroundColor="{StaticResource BackgroundColor}"
              Title="WorkoutView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid BackgroundColor="{StaticResource BackgroundColor}" Padding="15,0,15,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        
+        <HorizontalStackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+            <Button Style="{StaticResource MainButton}" Text="New plan" FontSize="Small" WidthRequest="160" MaximumHeightRequest="50"/>
+            <Button Style="{StaticResource MainButton}" Text="Empty workout" FontSize="Small" MaximumHeightRequest="50" />
+        </HorizontalStackLayout>
+
+        <Label Grid.Row="1" Style="{StaticResource Header}" Text="Your training plans" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Spacing="30">
+                <CollectionView 
+                    ItemsSource="{Binding TrainingPlans}"
+                    >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:TrainingPlanModel">
+                            <Grid Margin="0,0,0,30">
+                                <Border Padding="15"
+                                        StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                        Background="{StaticResource SecondaryBackgroundColor}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="50"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid MinimumHeightRequest="100">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Style="{StaticResource Big}" Text="{Binding name}"/>
+                                            <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                                                    Text="˙˙˙" FontSize="40"
+                                                    HorizontalOptions="End" VerticalOptions="Start"
+                                                    Margin="10,0,0,0"
+                                                    />
+                                        </Grid>
+
+                                        <Button Style="{StaticResource MainButton}" Grid.Row="1" Text="Start" FontSize="Small" FontAttributes="Bold"/>
+                                    </Grid>
+                                    
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+    
 </ContentPage>

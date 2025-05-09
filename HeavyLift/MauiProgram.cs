@@ -48,10 +48,12 @@ namespace HeavyLift
             //VIEW MODELS
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<WorkoutViewModel>();
 
             //VIEWS
             builder.Services.AddTransient<LoginView>();     
             builder.Services.AddTransient<RegisterView>();
+            builder.Services.AddTransient<WorkoutView>();
 
 #if DEBUG
             builder.Logging.AddDebug();
