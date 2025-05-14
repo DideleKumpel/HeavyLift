@@ -23,12 +23,17 @@ namespace HeavyLift.ViewModels
         private bool _loadingIsVisible;
         [ObservableProperty]
         private bool _errorLoadMessage;
+
+        [ObservableProperty]
         private TrainingPlanModel _selectedTrainingPlan;
+        [ObservableProperty]
+        private bool _trainingMenuVisibile;
 
         public WorkoutViewModel(IServiceProvider serviceProvider, TrainingPlanService trainingPlanService)
         {
             LoadingIsVisible = true;
             ErrorLoadMessage = false;
+            TrainingMenuVisibile = false;
             _serviceProvider = serviceProvider;
             _trainingPlanService = trainingPlanService;
             GetTrainingPlans();
@@ -51,7 +56,19 @@ namespace HeavyLift.ViewModels
         [RelayCommand]
         private void ShowTrainingMenu(TrainingPlanModel trainingPlan)
         {
-            // Implement the logic to show the training menu for the selected training plan
+            if( trainingPlan == null)
+            {
+                return;
+            }
+            SelectedTrainingPlan = trainingPlan;
+            TrainingMenuVisibile = true;
+        }
+
+        [RelayCommand]
+        private void CloseTrainingMenu()
+        {
+            TrainingMenuVisibile = false;
+            SelectedTrainingPlan = null;
         }
 
         [RelayCommand]

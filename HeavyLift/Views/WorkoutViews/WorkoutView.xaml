@@ -21,7 +21,7 @@
 
         <Label Grid.Row="1" Style="{StaticResource Header}" Text="Your training plans" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-        <ScrollView Grid.Row="2">
+        <ScrollView Grid.Row="2" >
             <VerticalStackLayout Spacing="30">
                 <CollectionView
                     ItemsSource="{Binding TrainingPlans}"
@@ -50,6 +50,8 @@
                                                     Text="˙˙˙" FontSize="40"
                                                     HorizontalOptions="End" VerticalOptions="Start"
                                                     Margin="10,0,0,0"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=ShowTrainingMenuCommand}"
+                                                    CommandParameter="{Binding .}"
                                                     />
                                         </Grid>
 
@@ -66,16 +68,40 @@
         
         
         <!-- Workout menu !-->
-        <Border Grid.RowSpan="3" 
-                Background="{StaticResource SecondaryBackgroundColor}"
-                StrokeThickness="4" StrokeShape="RoundRectangle 30,30,0,0" 
-                Margin="-15,0,-15, -5"  
-                VerticalOptions="End" 
-                HeightRequest="300">
-            <VerticalStackLayout>
-                
+        <Grid Grid.RowSpan="3" VerticalOptions="End" IsVisible="{Binding TrainingMenuVisibile}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="320"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" HeightRequest="500" Margin="-15, 0" Background="Transparent" Command="{Binding CloseTrainingMenuCommand}"/>
+            <Border  Grid.Row="1"
+                    Background="{StaticResource SecondaryBackgroundColor}"
+                    StrokeThickness="4" StrokeShape="RoundRectangle 30,30,0,0" Stroke="{StaticResource PrimaryColor}"
+                    Margin="-20,0,-20, -5"  Padding="15"
+                    VerticalOptions="End" 
+                    HeightRequest="325"
+                    >
+                <VerticalStackLayout Spacing="10">
+                    <Grid MinimumHeightRequest="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{StaticResource Big}" Text="{Binding SelectedTrainingPlan.name}" Margin="10" HorizontalOptions="Center"/>
+                        <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                              Text="X" FontSize="40"
+                              HorizontalOptions="End" VerticalOptions="Start"
+                              Margin="10,0,0,0"
+                              Command="{Binding CloseTrainingMenuCommand}"
+                        />
+                    </Grid>
+
+                    <Button Style="{StaticResource MainButton}" Text="Edit" FontSize="Small" FontAttributes="Bold"/>
+                    <Button Style="{StaticResource MainButton}" Text="Show details" FontSize="Small" FontAttributes="Bold"/>
+                    <Button Style="{StaticResource DangerButton}" Text="Delete" FontSize="Small" FontAttributes="Bold"/>
             </VerticalStackLayout>
         </Border>
+        </Grid>
         
         <!-- Loading screen !-->
         <Border Grid.Row="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
