@@ -9,7 +9,7 @@
              Title="WorkoutView">
     <Grid BackgroundColor="{StaticResource BackgroundColor}" Padding="15,0,15,0">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
@@ -23,8 +23,10 @@
 
         <ScrollView Grid.Row="2">
             <VerticalStackLayout Spacing="30">
-                <CollectionView 
+                <CollectionView
                     ItemsSource="{Binding TrainingPlans}"
+                    SelectionMode="None"
+                    
                     >
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:TrainingPlanModel">
@@ -43,7 +45,7 @@
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <Label Style="{StaticResource Big}" Text="{Binding name}"/>
+                                            <Label Style="{StaticResource Big}" Text="{Binding name}" Margin="10" HorizontalOptions="Center"/>
                                             <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
                                                     Text="˙˙˙" FontSize="40"
                                                     HorizontalOptions="End" VerticalOptions="Start"
@@ -61,6 +63,38 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
+        
+        
+        <!-- Workout menu !-->
+        <Border Grid.RowSpan="3" 
+                Background="{StaticResource SecondaryBackgroundColor}"
+                StrokeThickness="4" StrokeShape="RoundRectangle 30,30,0,0" 
+                Margin="-15,0,-15, -5"  
+                VerticalOptions="End" 
+                HeightRequest="300">
+            <VerticalStackLayout>
+                
+            </VerticalStackLayout>
+        </Border>
+        
+        <!-- Loading screen !-->
+        <Border Grid.Row="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+        <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+        <!-- Error screen-->
+        <Border Grid.Row="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding ErrorLoadMessage}" Padding="20">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="no_connection_icon.png" 
+                       HeightRequest="100"
+                       Aspect="AspectFit"
+                       Margin="0"/>
+                <Label Style="{StaticResource Medium}" Text="Error ocurded while loading training plans."
+                       HorizontalOptions="Center"
+                       />
+                <Label Style="{StaticResource Small}" Text="Check your internet connection and reload app."
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
     </Grid>
     
 </ContentPage>
