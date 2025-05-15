@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns:local="clr-namespace:HeavyLift.Views.DialogPopups"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Class="HeavyLift.Views.DialogPopups.ConformationPopup"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             Color="Transparent"
+               >
+
+    <Border Padding="20"
+            Stroke="{StaticResource PrimaryColor}" StrokeThickness="4"  StrokeShape="Roundrectangle 30"
+            BackgroundColor="{StaticResource SecondaryBackgroundColor}">
+        <VerticalStackLayout Spacing="10">
+            <Label Style="{StaticResource Big}"
+            Text="Do you wanna delete this?"
+            HorizontalOptions="Center" />
+            <Label Style="{StaticResource Warning}"
+                Text="This acction cannot me undone."
+                HorizontalOptions="Center" />
+            <HorizontalStackLayout Margin="0,20,0,0" HorizontalOptions="Center" Spacing="15">
+                <Button Text="Yes"
+                    Style="{StaticResource  MainButton}"
+                        Clicked="BtnYesClicked"
+                     />
+                <Button Text="No"
+                    Style="{StaticResource DangerButton}"
+                        Clicked="BtnNoClicked"
+                    />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

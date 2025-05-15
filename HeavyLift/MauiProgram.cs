@@ -3,6 +3,7 @@ using HeavyLift.Views;
 using HeavyLift.Services;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
+using CommunityToolkit.Maui;
 
 namespace HeavyLift
 {
@@ -13,6 +14,7 @@ namespace HeavyLift
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

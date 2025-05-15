@@ -98,7 +98,7 @@
 
                     <Button Style="{StaticResource MainButton}" Text="Edit" FontSize="Small" FontAttributes="Bold"/>
                     <Button Style="{StaticResource MainButton}" Text="Show details" FontSize="Small" FontAttributes="Bold"/>
-                    <Button Style="{StaticResource DangerButton}" Text="Delete" FontSize="Small" FontAttributes="Bold"/>
+                    <Button Style="{StaticResource DangerButton}" Text="Delete" FontSize="Small" FontAttributes="Bold" Command="{Binding DeleteTrainingPlanCommand}"/>
             </VerticalStackLayout>
         </Border>
         </Grid>

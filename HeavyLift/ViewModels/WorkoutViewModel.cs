@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Maui.Views;
 using HeavyLift.Models;
 using HeavyLift.Services;
+using HeavyLift.Views.DialogPopups;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -81,6 +83,7 @@ namespace HeavyLift.ViewModels
         [RelayCommand]
         private void DeleteTrainingPlan()
         {
+            Application.Current.MainPage.ShowPopup(new ConformationPopup());
             // Implement the logic to delete the selected training plan
         }
         [RelayCommand]
