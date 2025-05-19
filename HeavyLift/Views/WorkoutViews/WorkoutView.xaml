@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeavyLift.Views.WorkoutView"
+             xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
+             xmlns:model="clr-namespace:HeavyLift.Models" 
+             x:DataType="viewmodel:WorkoutViewModel"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Title="WorkoutView">
+    <Grid BackgroundColor="{StaticResource BackgroundColor}" Padding="15,0,15,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+        </Grid.RowDefinitions>
+        
+        <HorizontalStackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+            <Button Style="{StaticResource MainButton}" Text="New plan" FontSize="Small" WidthRequest="160" MaximumHeightRequest="50"/>
+            <Button Style="{StaticResource MainButton}" Text="Empty workout" FontSize="Small" MaximumHeightRequest="50" />
+        </HorizontalStackLayout>
+
+        <Label Grid.Row="1" Style="{StaticResource Header}" Text="Your training plans" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+        <ScrollView Grid.Row="2" >
+            <VerticalStackLayout Spacing="30">
+                <CollectionView
+                    ItemsSource="{Binding TrainingPlans}"
+                    SelectionMode="None"
+                    
+                    >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:TrainingPlanModel">
+                            <Grid Margin="0,0,0,30">
+                                <Border Padding="15"
+                                        StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                        Background="{StaticResource SecondaryBackgroundColor}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="50"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid MinimumHeightRequest="100">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Label Style="{StaticResource Big}" Text="{Binding name}" Margin="10" HorizontalOptions="Center"/>
+                                            <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                                                    Text="˙˙˙" FontSize="40"
+                                                    HorizontalOptions="End" VerticalOptions="Start"
+                                                    Margin="10,0,0,0"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:WorkoutViewModel}}, Path=ShowTrainingMenuCommand}"
+                                                    CommandParameter="{Binding .}"
+                                                    />
+                                        </Grid>
+
+                                        <Button Style="{StaticResource MainButton}" Grid.Row="1" Text="Start" FontSize="Small" FontAttributes="Bold"/>
+                                    </Grid>
+                                    
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+        
+        
+        <!-- Workout menu !-->
+        <Grid Grid.RowSpan="3" VerticalOptions="End" IsVisible="{Binding TrainingMenuVisibile}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="320"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" HeightRequest="500" Margin="-15, 0" Background="Transparent" Command="{Binding CloseTrainingMenuCommand}"/>
+            <Border  Grid.Row="1"
+                    Background="{StaticResource SecondaryBackgroundColor}"
+                    StrokeThickness="4" StrokeShape="RoundRectangle 30,30,0,0" Stroke="{StaticResource PrimaryColor}"
+                    Margin="-20,0,-20, -5"  Padding="15"
+                    VerticalOptions="End" 
+                    HeightRequest="325"
+                    >
+                <VerticalStackLayout Spacing="10">
+                    <Grid MinimumHeightRequest="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Style="{StaticResource Big}" Text="{Binding SelectedTrainingPlan.name}" Margin="10" HorizontalOptions="Center"/>
+                        <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                              Text="X" FontSize="40"
+                              HorizontalOptions="End" VerticalOptions="Start"
+                              Margin="10,0,0,0"
+                              Command="{Binding CloseTrainingMenuCommand}"
+                        />
+                    </Grid>
+
+                    <Button Style="{StaticResource MainButton}" Text="Edit" FontSize="Small" FontAttributes="Bold"/>
+                    <Button Style="{StaticResource MainButton}" Text="Show details" FontSize="Small" FontAttributes="Bold"/>
+                    <Button Style="{StaticResource DangerButton}" Text="Delete" FontSize="Small" FontAttributes="Bold" Command="{Binding DeleteTrainingPlanCommand}"/>
+            </VerticalStackLayout>
+        </Border>
+        </Grid>
+        
+        <!-- Loading screen !-->
+        <Border Grid.Row="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+        <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+        <!-- Error screen-->
+        <Border Grid.Row="2" BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding ErrorLoadMessage}" Padding="20">
+            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                <Image Source="no_connection_icon.png" 
+                       HeightRequest="100"
+                       Aspect="AspectFit"
+                       Margin="0"/>
+                <Label Style="{StaticResource Medium}" Text="Error ocurded while loading training plans."
+                       HorizontalOptions="Center"
+                       />
+                <Label Style="{StaticResource Small}" Text="Check your internet connection and reload app."
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+    
+</ContentPage>

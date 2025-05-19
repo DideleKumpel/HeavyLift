@@ -4,6 +4,7 @@
              x:Class="HeavyLift.Views.LoginView"
              xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels"
              x:DataType="viewmodel:LoginViewModel"
+             Background="{StaticResource BackgroundColor}"
              Title="LoginView">
     <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
         <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">

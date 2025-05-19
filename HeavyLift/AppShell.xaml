@@ -5,21 +5,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:HeavyLift"
     xmlns:views="clr-namespace:HeavyLift.Views"
-
     Title="HeavyLift">
 
     <TabBar>
-        <ShellContent Title="Home"
-                   Icon="home_icon.png">
-            <views:HomeView/>
-        </ShellContent>
-        <ShellContent Title="Workouts"
-                   Icon="dumbbell_icon.png">
-            <views:WorkoutView />
-        </ShellContent>
-        <ShellContent Title="Profile"
-                   Icon="user_icon.png">
-            <views:ProfileView />
-        </ShellContent>
+        <Tab Title="Home" Icon="home_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate views:HomeView}"/>
+        </Tab>
+        <Tab Title="Workouts" Icon="dumbbell_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate views:WorkoutView}"/>
+        </Tab>
+        <Tab Title="Profile" Icon="user_icon.png">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfileView}"/>
+        </Tab>
     </TabBar>
 </Shell>

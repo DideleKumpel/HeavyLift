@@ -3,6 +3,7 @@ using HeavyLift.Views;
 using HeavyLift.Services;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
+using CommunityToolkit.Maui;
 
 namespace HeavyLift
 {
@@ -13,6 +14,7 @@ namespace HeavyLift
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -22,7 +24,7 @@ namespace HeavyLift
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             { 
-                var apiBaseUrl = "https://e5b2-84-40-218-81.ngrok-free.app";
+                var apiBaseUrl = "https://304a-217-173-199-150.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {
@@ -44,14 +46,17 @@ namespace HeavyLift
             //SERVICES
             builder.Services.AddSingleton<AuthentitacionService>();
             builder.Services.AddSingleton<UserService>();
+            builder.Services.AddSingleton<TrainingPlanService>();
 
             //VIEW MODELS
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
+            builder.Services.AddTransient<WorkoutViewModel>();
 
             //VIEWS
             builder.Services.AddTransient<LoginView>();     
             builder.Services.AddTransient<RegisterView>();
+            builder.Services.AddTransient<WorkoutView>();
 
 #if DEBUG
             builder.Logging.AddDebug();
