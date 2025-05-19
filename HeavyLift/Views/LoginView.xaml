@@ -6,7 +6,8 @@
              x:DataType="viewmodel:LoginViewModel"
              Background="{StaticResource BackgroundColor}"
              Title="LoginView">
-    <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
+    <Grid>
+        <ScrollView VerticalOptions="Fill"  Background="{StaticResource BackgroundBrush}">
         <VerticalStackLayout VerticalOptions="Center"  HorizontalOptions="Fill" Padding="20" Spacing="15">
             <Image
                     Source="heavylift_logo.png"
@@ -41,4 +42,13 @@
 
         </VerticalStackLayout>
     </ScrollView>
+        
+        <!-- Loading screen !-->
+        <Border BackgroundColor="{StaticResource BackgroundColor}" StrokeThickness="0" IsVisible="{Binding LoadingIsVisible}">
+            <ActivityIndicator Color="{StaticResource PrimaryColor}" IsRunning="True"  HeightRequest="150"/>
+        </Border>
+    </Grid>
+
+    
+    
 </ContentPage>

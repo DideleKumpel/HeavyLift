@@ -22,22 +22,27 @@ namespace HeavyLift.ViewModels
         public string _passwordInput;
         [ObservableProperty]
         public string _errorMessage;
+        [ObservableProperty]
+        public bool _loadingIsVisible;
 
 
         [RelayCommand]
         public async Task Login()
         {
+            LoadingIsVisible = true;
             ErrorMessage = "";
             if (!IsValidEmail(EmailInput))
             {
-                ErrorMessage += "Invalid email format.\n";
+                ErrorMessage = "Invalid email format.\n";
+                LoadingIsVisible = false;
+                return;
             }
             if(string.IsNullOrWhiteSpace(PasswordInput))
             {
                 ErrorMessage = "Please fill in all fields.\n";
+                LoadingIsVisible = false;
                 return;
             }
-
             try
             {
                 var result = await _authentitacionService.GetAuthorizationAsync(EmailInput, PasswordInput);
@@ -45,12 +50,14 @@ namespace HeavyLift.ViewModels
                 {
                     ErrorMessage = result.message;
                     PasswordInput = "";
+                    LoadingIsVisible = false;
                     return;
                 }
                 Application.Current.MainPage = _serviceProvider.GetRequiredService<AppShell>();
             }
             catch {
                 ErrorMessage = "Error occured while loggin try again later.";
+                LoadingIsVisible = false;
                 return;
             }
 
@@ -66,16 +73,19 @@ namespace HeavyLift.ViewModels
             ErrorMessage = "";
             _authentitacionService = authservice;
             _serviceProvider = serviceProvider;
+            _loadingIsVisible = false;
             TryToLogIn();
         }
 
         private async void TryToLogIn()
         {
+            LoadingIsVisible = true;
             try
             {
                 string token = await SecureStorage.GetAsync("AuthTokenKey");
                 if (string.IsNullOrEmpty(token))
                 {
+                    LoadingIsVisible = false;
                     return;
                 }
                 bool succes = await _authentitacionService.RefreshToken(token);
@@ -85,6 +95,7 @@ namespace HeavyLift.ViewModels
                 }
             }
             catch { }
+            LoadingIsVisible = false;
         }
 
         private bool IsValidEmail(string email)
