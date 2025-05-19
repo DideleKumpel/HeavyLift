@@ -81,10 +81,31 @@ namespace HeavyLift.ViewModels
         }
 
         [RelayCommand]
-        private void DeleteTrainingPlan()
+        private async Task DeleteTrainingPlan()
         {
-            Application.Current.MainPage.ShowPopup(new ConformationPopup());
-            // Implement the logic to delete the selected training plan
+            var resoult = await Application.Current.MainPage.ShowPopupAsync(new ConformationPopup());
+            if ( resoult is bool boolResoult)
+            {
+                if (boolResoult == true)
+                {
+                    var result = await _trainingPlanService.DeleteTrainingPlan(SelectedTrainingPlan.id);
+                    if (result.success)
+                    {
+                        await Application.Current.MainPage.ShowPopupAsync(new MessagePopup("Training plan deleted successfully"));
+                        TrainingPlans.Remove(SelectedTrainingPlan);
+                        CloseTrainingMenu();
+                    }
+                    else
+                    {
+                         await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(result.message));
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                return;
+            }
         }
         [RelayCommand]
         private void ShowTrainingPlanDetails(TrainingPlanModel trainingPlan)
