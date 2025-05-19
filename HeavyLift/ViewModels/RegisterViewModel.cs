@@ -27,6 +27,8 @@ namespace HeavyLift.ViewModels
         public string _errorMessage;
         [ObservableProperty]
         public string _succesMessage;
+        [ObservableProperty]
+        public bool _loadingIsVisible;
 
         [RelayCommand]
         public void SwitchToLoginPanel()
@@ -37,11 +39,13 @@ namespace HeavyLift.ViewModels
         [RelayCommand]
         public async Task RegisterAccount()
         {
+            LoadingIsVisible = true;
             SuccesMessage = "";
             ErrorMessage = "";
             if( PasswordInput != PasswordRepeatInput)
             {
                 ErrorMessage = "Password are not the same.";
+                LoadingIsVisible = false;
                 return;
             }
             //Rest validation is API site
@@ -52,10 +56,12 @@ namespace HeavyLift.ViewModels
                 SuccesMessage = "Account has been created go to login page";
             }
             ErrorMessage = response.message;
+            LoadingIsVisible = false;
         }
 
         public RegisterViewModel(IServiceProvider serviceProvider, UserService userService)
         {
+            _loadingIsVisible = false;
             ErrorMessage = "";
             _serviceProvider = serviceProvider;
             _userService = userService;
