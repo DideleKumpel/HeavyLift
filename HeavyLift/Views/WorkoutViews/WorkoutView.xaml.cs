@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Input;
 using HeavyLift.ViewModels;
 
 namespace HeavyLift.Views;
@@ -9,4 +10,5 @@ public partial class WorkoutView : ContentPage
 		InitializeComponent();
         BindingContext = vm;
     }
+
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HeavyLift.Views.WorkoutViews.TrainingPlanCreatorView"
+             xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels.WorkoutViewModels"
+             xmlns:model="clr-namespace:HeavyLift.Models" 
+             x:DataType="viewmodel:TrainingPlanCreatorViewModel"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             Title="TrainingPlanCreatorView">
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding GoBackBtnCommand}"
+                            IconOverride="back_arrow.png"/>
+    </Shell.BackButtonBehavior>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="20">
+            <VerticalStackLayout>
+                <Entry Placeholder="Workout name" PlaceholderColor="{StaticResource TextColor}"
+                    Text="{Binding TrainingPlan.name}" TextColor="{StaticResource TextColor}" FontSize="16"
+                />
+                <Rectangle BackgroundColor="{StaticResource SecondaryColor}"
+                           HeightRequest="3"/>
+            </VerticalStackLayout>
+            
+            <CollectionView
+                ItemsSource="{Binding TrainingPlan.plan}"
+                SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:ExerciseModel">
+                        
+                        <Grid Margin="0,0,0,30">
+                            <Border Padding="15"
+                                StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                Background="{StaticResource SecondaryBackgroundColor}">
+                                <VerticalStackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="64"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="64"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            HeightRequest="64" WidthRequest="64"
+                                            StrokeShape="RoundRectangle 32" StrokeThickness="0"
+                                            Background="{StaticResource White}">
+                                            <Image Source="no_picture.png" 
+                                                   HeightRequest="64" WidthRequest="64"
+                                                   Aspect="AspectFit"/>
+                                        </Border>
+                                        <Label Grid.Column="1" Style="{StaticResource Big}" Text="{Binding name}"
+                                               Margin="10"/>
+                                        <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                                            Text="˙˙˙" FontSize="40"
+                                            HorizontalOptions="End" VerticalOptions="Start"
+                                        />
+                                    </Grid>
+                                    
+                                    <CollectionView
+                                        ItemsSource="{Binding reps}"
+                                        SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="20"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Label Text="1" />
+                                                    <Label Grid.Column="1" Style="{StaticResource Medium}"
+                                                        Text="{Binding reps.Count}"/>
+                                                    <Label Grid.Column="2" Style="{StaticResource Medium}"
+                                                            Text="{Binding reps.Count}"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                        
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <VerticalStackLayout Spacing="15">
+                <Button Style="{StaticResource MainButton}" Text="Add exercise" />
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
+                    <Button Style="{StaticResource MainButton}" Text="Save" WidthRequest="160" />
+                    <Button Style="{StaticResource DangerButton}" Text="Cancel" WidthRequest="160" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

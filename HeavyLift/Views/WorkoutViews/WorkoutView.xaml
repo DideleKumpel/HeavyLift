@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         
         <HorizontalStackLayout Padding="5" HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
-            <Button Style="{StaticResource MainButton}" Text="New plan" FontSize="Small" WidthRequest="160" MaximumHeightRequest="50"/>
+            <Button Style="{StaticResource MainButton}" Text="New plan" FontSize="Small" WidthRequest="160" MaximumHeightRequest="50" Command="{Binding CreateNewTrainingPlanCommand}"/>
             <Button Style="{StaticResource MainButton}" Text="Empty workout" FontSize="Small" MaximumHeightRequest="50" />
         </HorizontalStackLayout>
 

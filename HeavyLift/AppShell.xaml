@@ -6,7 +6,10 @@
     xmlns:local="clr-namespace:HeavyLift"
     xmlns:views="clr-namespace:HeavyLift.Views"
     Title="HeavyLift">
-
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IconOverride="back_arrow.png"/>
+    </Shell.BackButtonBehavior>
+    
     <TabBar>
         <Tab Title="Home" Icon="home_icon.png">
             <ShellContent ContentTemplate="{DataTemplate views:HomeView}"/>
@@ -18,4 +21,7 @@
             <ShellContent ContentTemplate="{DataTemplate views:ProfileView}"/>
         </Tab>
     </TabBar>
+    
+    
+    
 </Shell>

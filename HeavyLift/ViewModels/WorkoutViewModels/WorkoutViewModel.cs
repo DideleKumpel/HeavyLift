@@ -42,6 +42,12 @@ namespace HeavyLift.ViewModels
         }
 
         [RelayCommand]
+        private async Task CreateNewTrainingPlan() {
+            await Shell.Current.GoToAsync("TrainingPlanCreatorView", new Dictionary<string, object> { { "TrainingPlanModel", TrainingPlans[0] } });  //change after the buging to create new training plan
+
+        }
+
+        [RelayCommand]
         private void StartTraining(TrainingPlanModel trainingPlan)
         {
             //first need to do workout session page and logics

@@ -4,6 +4,8 @@ using HeavyLift.Services;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Headers;
 using CommunityToolkit.Maui;
+using HeavyLift.ViewModels.WorkoutViewModels;
+using HeavyLift.Views.WorkoutViews;
 
 namespace HeavyLift
 {
@@ -24,7 +26,7 @@ namespace HeavyLift
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             { 
-                var apiBaseUrl = "https://304a-217-173-199-150.ngrok-free.app";
+                var apiBaseUrl = "https://8cfc-89-229-92-211.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {
@@ -52,11 +54,13 @@ namespace HeavyLift
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<WorkoutViewModel>();
+            builder.Services.AddTransient<TrainingPlanCreatorViewModel>();
 
             //VIEWS
             builder.Services.AddTransient<LoginView>();     
             builder.Services.AddTransient<RegisterView>();
             builder.Services.AddTransient<WorkoutView>();
+            builder.Services.AddTransient<TrainingPlanCreatorView>();
 
 #if DEBUG
             builder.Logging.AddDebug();
