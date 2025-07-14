@@ -8,13 +8,13 @@ namespace HeavyLift.TemplateSelectors
 {
     internal class ExerciseTemplateSelector: DataTemplateSelector
     {
-        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container) //function to select the template based on the exercise type
         {
-            var rep = item as HeavyLift.Models.RepModel;
-            var collectionView = container as CollectionView;
-            if (container is Element element && element.Parent?.BindingContext is HeavyLift.Models.ExerciseModel exercise)
+            var exercise = item as HeavyLift.Models.ExerciseModel; // cast the item to ExderciseModel
+            var collectionView = container as CollectionView; // cast the container to CollectionView
+            if (container is Element element) // check if the parent of the element is bound to an ExerciseModel
             {
-                switch (exercise?.type)
+                switch (exercise?.type) // switch based on the type of exercise
                 {
                     case "Weight":
                         return collectionView.Resources["WeightExerciseTemplate"] as DataTemplate;

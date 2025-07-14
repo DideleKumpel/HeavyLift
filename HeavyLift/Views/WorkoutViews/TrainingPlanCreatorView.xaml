@@ -32,9 +32,11 @@
 
             <CollectionView
                 ItemsSource="{Binding TrainingPlan.plan}"
+                ItemTemplate="{StaticResource ExerciseTemplateSelector}"
+                BindingContext="{Binding .}"
                 SelectionMode="None">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="model:ExerciseModel">
+                <CollectionView.Resources>
+                    <DataTemplate x:Key="WeightExerciseTemplate" x:DataType="model:ExerciseModel">
                         <Grid Margin="0,0,0,30">
                             <Border Padding="15"
                                 StrokeShape="RoundRectangle 30" StrokeThickness="0"
@@ -61,14 +63,25 @@
                                             HorizontalOptions="End" VerticalOptions="Start"
                                         />
                                     </Grid>
-                                     <!-- Exercise reps table -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource Medium}"  Text="SET" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Style="{StaticResource Medium}" Grid.Column="1"  Text="REPS" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Style="{StaticResource Medium}" Grid.Column="2"  Text="WEIGHT" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Grid>
+                                    <!-- Exercise reps table -->
                                     <CollectionView
                                         ItemsSource="{Binding reps}"
-                                        ItemTemplate="{StaticResource ExerciseTemplateSelector}"
-                                        BindingContext="{Binding .}"
                                         SelectionMode="None">
-                                        <CollectionView.Resources>
-                                            <DataTemplate x:Key="WeightExerciseTemplate" x:DataType="model:RepModel">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:RepModel">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="30"/>
@@ -105,8 +118,61 @@
                                                 </Grid>
 
                                             </DataTemplate>
-
-                                            <DataTemplate x:Key="TimeExerciseTemplate" x:DataType="model:RepModel">
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                    
+                                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
+                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
+                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
+                                    </HorizontalStackLayout>
+                                    
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="TimeExerciseTemplate" x:DataType="model:ExerciseModel">
+                        <Grid Margin="0,0,0,30">
+                            <Border Padding="15"
+                                StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                Background="{StaticResource SecondaryBackgroundColor}">
+                                <VerticalStackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="64"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="64"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            HeightRequest="64" WidthRequest="64"
+                                            StrokeShape="RoundRectangle 32" StrokeThickness="0"
+                                            Background="{StaticResource White}">
+                                            <Image Source="no_picture.png" 
+                                                HeightRequest="64" WidthRequest="64"
+                                                Aspect="AspectFit"/>
+                                        </Border>
+                                        <Label Grid.Column="1" Style="{StaticResource Big}" Text="{Binding name}"
+                                            Margin="10"/>
+                                        <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                                            Text="˙˙˙" FontSize="40"
+                                            HorizontalOptions="End" VerticalOptions="Start"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource Medium}"  Text="SET" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Style="{StaticResource Medium}" Grid.Column="1"  Text="TIME(min/sec)" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Grid>
+                                    <!-- Exercise reps table -->
+                                    <CollectionView
+                                        ItemsSource="{Binding reps}"
+                                        SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:RepModel">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="30"/>
@@ -122,18 +188,18 @@
                                                                 <Binding Path="." />
                                                                 <!-- RepModel -->
                                                                 <Binding Path="reps" 
-                                                                     Source="{RelativeSource AncestorType={x:Type model:ExerciseModel}}" />
+                                                                    Source="{RelativeSource AncestorType={x:Type model:ExerciseModel}}" />
                                                             </MultiBinding>
                                                         </Label.Text>
                                                     </Label>
                                                     <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" >
                                                         <Entry  MinimumWidthRequest="50" 
                                                             Text="{Binding Minutes}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
-                                                            HorizontalTextAlignment="Center" MaxLength="4"/>
+                                                            HorizontalTextAlignment="Center" MaxLength="3"/>
                                                         <Label Text=":" Style="{StaticResource Big}" VerticalOptions="Center"/>
                                                         <Entry  MinimumWidthRequest="50" 
-                                                                Text="{Binding Seconds}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
-                                                                HorizontalTextAlignment="Center" MaxLength="2">
+                                                            Text="{Binding Seconds}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
+                                                            HorizontalTextAlignment="Center" MaxLength="2">
                                                             <Entry.Behaviors>
                                                                 <behaviors:TimeEntryBehavior MaxValue="59"/>
                                                             </Entry.Behaviors>
@@ -147,7 +213,64 @@
 
                                             </DataTemplate>
 
-                                            <DataTemplate x:Key="DistanceExerciseTemplate" x:DataType="model:RepModel">
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
+                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
+                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
+                                    </HorizontalStackLayout>
+
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate x:Key="DistanceExerciseTemplate" x:DataType="model:ExerciseModel">
+                        <Grid Margin="0,0,0,30">
+                            <Border Padding="15"
+                                StrokeShape="RoundRectangle 30" StrokeThickness="0"
+                                Background="{StaticResource SecondaryBackgroundColor}">
+                                <VerticalStackLayout>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="64"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="64"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            HeightRequest="64" WidthRequest="64"
+                                            StrokeShape="RoundRectangle 32" StrokeThickness="0"
+                                            Background="{StaticResource White}">
+                                            <Image Source="no_picture.png" 
+                                                HeightRequest="64" WidthRequest="64"
+                                                Aspect="AspectFit"/>
+                                        </Border>
+                                        <Label Grid.Column="1" Style="{StaticResource Big}" Text="{Binding name}"
+                                            Margin="10"/>
+                                        <Button Style="{StaticResource TextBtnPrimaryColor}"  Grid.Column="2" 
+                                            Text="˙˙˙" FontSize="40"
+                                            HorizontalOptions="End" VerticalOptions="Start"
+                                        />
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="30"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Style="{StaticResource Medium}"  Text="SET" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Style="{StaticResource Medium}" Grid.Column="1"  Text="TIME(min/sec)" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <Label Style="{StaticResource Medium}" Grid.Column="2"  Text="DISTANCE" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Grid>
+                                    <!-- Exercise reps table -->
+                                    <CollectionView
+                                        ItemsSource="{Binding reps}"
+                                        SelectionMode="None">
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="model:RepModel">
                                                 <Grid>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="30"/>
@@ -168,13 +291,23 @@
                                                             </MultiBinding>
                                                         </Label.Text>
                                                     </Label>
-                                                    <Entry Grid.Column="1" HorizontalOptions="Center" MinimumWidthRequest="50" 
-                                                        Text="{Binding Reps}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
-                                                        HorizontalTextAlignment="Center" MaxLength="4"/>
+                                                    <HorizontalStackLayout Grid.Column="1" HorizontalOptions="Center" >
+                                                        <Entry  MinimumWidthRequest="50" 
+                                                                Text="{Binding Minutes}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
+                                                                HorizontalTextAlignment="Center" MaxLength="3"/>
+                                                        <Label Text=":" Style="{StaticResource Big}" VerticalOptions="Center"/>
+                                                        <Entry  MinimumWidthRequest="50" 
+                                                                Text="{Binding Seconds}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
+                                                                HorizontalTextAlignment="Center" MaxLength="2">
+                                                            <Entry.Behaviors>
+                                                                <behaviors:TimeEntryBehavior MaxValue="59"/>
+                                                            </Entry.Behaviors>
+                                                        </Entry>
+                                                    </HorizontalStackLayout>
                                                     <HorizontalStackLayout Grid.Column="2" HorizontalOptions="Center">
                                                         <Entry Grid.Column="2" HorizontalOptions="Center" MinimumWidthRequest="50" 
-                                                            Text="{Binding Weight}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
-                                                            HorizontalTextAlignment="Center" MaxLength="4"/>
+                                                            Text="{Binding Distance}" Keyboard="Numeric" TextColor="{StaticResource TextColor}" FontSize="24"
+                                                            HorizontalTextAlignment="Center" MaxLength="5"/>
                                                         <Label Text="km" Style="{StaticResource Big}" VerticalOptions="Center"/>
                                                     </HorizontalStackLayout>
 
@@ -184,20 +317,19 @@
                                                 </Grid>
 
                                             </DataTemplate>
-
-                                        </CollectionView.Resources>
+                                        </CollectionView.ItemTemplate>
                                     </CollectionView>
-                                    
+
                                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
                                         <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
                                         <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
                                     </HorizontalStackLayout>
-                                    
+
                                 </VerticalStackLayout>
                             </Border>
                         </Grid>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
+                </CollectionView.Resources>
             </CollectionView>
 
             <VerticalStackLayout Spacing="15">
