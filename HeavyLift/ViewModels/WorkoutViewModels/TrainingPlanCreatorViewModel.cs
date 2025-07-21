@@ -5,6 +5,7 @@ using HeavyLift.Models;
 using HeavyLift.Views.DialogPopups;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,18 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
             {
                 return;
             }
+        }
+
+        [RelayCommand]
+        private void AddSet( ExerciseModel exercise)
+        {
+            exercise.reps.Add(new RepModel());
+        }
+        [RelayCommand]
+        private void RemoveSet(ExerciseModel exercise)
+        {
+            if(exercise.reps.Count > 0)
+            exercise.reps.RemoveAt(exercise.reps.Count - 1);
         }
 
     }

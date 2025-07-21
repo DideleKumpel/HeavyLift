@@ -122,8 +122,13 @@
                                     </CollectionView>
                                     
                                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
-                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
-                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
+                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=AddSetCommand}"
+                                                CommandParameter="{Binding .}"/>
+
+                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" 
+                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=RemoveSetCommand}"
+                                                 CommandParameter="{Binding .}"/>
                                     </HorizontalStackLayout>
                                     
                                 </VerticalStackLayout>
@@ -217,8 +222,13 @@
                                     </CollectionView>
 
                                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
-                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
-                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
+                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=AddSetCommand}"
+                                            CommandParameter="{Binding .}"/>
+
+                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=RemoveSetCommand}"
+                                            CommandParameter="{Binding .}"/>
                                     </HorizontalStackLayout>
 
                                 </VerticalStackLayout>
@@ -321,8 +331,13 @@
                                     </CollectionView>
 
                                     <HorizontalStackLayout HorizontalOptions="Center" Spacing="30" Margin="0,10">
-                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" />
-                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" />
+                                        <Button Style="{StaticResource MainButton}" Text="Add set" WidthRequest="160" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=AddSetCommand}"
+                                            CommandParameter="{Binding .}"/>
+
+                                        <Button Style="{StaticResource DangerButton}" Text="Delete set" WidthRequest="160" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:TrainingPlanCreatorViewModel}}, Path=RemoveSetCommand}"
+                                            CommandParameter="{Binding .}"/>
                                     </HorizontalStackLayout>
 
                                 </VerticalStackLayout>
