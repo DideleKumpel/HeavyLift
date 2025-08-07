@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HeavyLift.Models;
 using HeavyLift.Views.DialogPopups;
+using HeavyLift.Views.WorkoutViews;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
 
         public TrainingPlanCreatorViewModel()
         {
-            // Initialize the view model properties or commands if needed
+            
         }
 
         [RelayCommand]
@@ -51,5 +52,10 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
             exercise.reps.RemoveAt(exercise.reps.Count - 1);
         }
 
+        [RelayCommand]
+        private async Task AddExercise()
+        {
+            await Shell.Current.GoToAsync(nameof(ExerciseSelectView));
+        }
     }
 }

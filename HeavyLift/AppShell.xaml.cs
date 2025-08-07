@@ -10,6 +10,7 @@ namespace HeavyLift
 
             // Register routes for navigation
             Routing.RegisterRoute(nameof(TrainingPlanCreatorView), typeof(TrainingPlanCreatorView));
+            Routing.RegisterRoute(nameof(ExerciseSelectView), typeof(ExerciseSelectView));
 
         }
     }

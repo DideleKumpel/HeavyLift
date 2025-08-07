@@ -99,6 +99,9 @@
 	  <MauiXaml Update="Views\RegisterView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\WorkoutViews\ExerciseSelectView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\WorkoutViews\TrainingPlanCreatorView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

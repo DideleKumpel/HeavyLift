@@ -26,7 +26,7 @@ namespace HeavyLift
             //API CONNECTION SETTINGS
             builder.Services.AddSingleton<HttpClient>(serviceProvider =>
             { 
-                var apiBaseUrl = "https://fd76159151ad.ngrok-free.app";
+                var apiBaseUrl = " https://df576cb79163.ngrok-free.app";
 
                 var httpClient = new HttpClient()
                 {
@@ -54,13 +54,15 @@ namespace HeavyLift
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<WorkoutViewModel>();
-            builder.Services.AddTransient<TrainingPlanCreatorViewModel>();
+            builder.Services.AddSingleton<TrainingPlanCreatorViewModel>();
+            builder.Services.AddSingleton<ExerciseSelectViewModel>();
 
             //VIEWS
             builder.Services.AddTransient<LoginView>();     
             builder.Services.AddTransient<RegisterView>();
             builder.Services.AddTransient<WorkoutView>();
-            builder.Services.AddTransient<TrainingPlanCreatorView>();
+            builder.Services.AddSingleton<TrainingPlanCreatorView>();
+            builder.Services.AddSingleton<ExerciseSelectView>();
 
 #if DEBUG
             builder.Logging.AddDebug();

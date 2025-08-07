@@ -348,10 +348,10 @@
             </CollectionView>
 
             <VerticalStackLayout Spacing="15">
-                <Button Style="{StaticResource MainButton}" Text="Add exercise" />
+                <Button Style="{StaticResource MainButton}" Text="Add exercise" Command="{Binding AddExerciseCommand}"/>
                 <HorizontalStackLayout HorizontalOptions="Center" Spacing="30">
                     <Button Style="{StaticResource MainButton}" Text="Save" WidthRequest="160" />
-                    <Button Style="{StaticResource DangerButton}" Text="Cancel" WidthRequest="160" />
+                    <Button Style="{StaticResource DangerButton}" Text="Cancel" WidthRequest="160" Command="{Binding GoBackBtnCommand}"/>
                 </HorizontalStackLayout>
             </VerticalStackLayout>
             

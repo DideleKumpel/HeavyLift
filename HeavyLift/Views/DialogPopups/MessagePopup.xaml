@@ -13,7 +13,7 @@
             BackgroundColor="{StaticResource SecondaryBackgroundColor}">
         <VerticalStackLayout Spacing="10">
             <Button Style="{StaticResource TextBtn}" x:Name="MessageLabel"
-                Text="Message"
+                Text="Message" LineBreakMode="WordWrap"
                 HorizontalOptions="Center" />
             <Button Text="Ok"
                     HorizontalOptions="Center"
