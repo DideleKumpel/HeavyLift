@@ -13,10 +13,10 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
     {
         private TrainingPlanModel _trainingPlan;
 
-        private ObservableCollection<ExerciseModel> exerciseList;
+        private ObservableCollection<ExerciseDataModel> exerciseList;
 
         [ObservableProperty]
-        private ObservableCollection<ExerciseModel> _displayedExercisesList;
+        private ObservableCollection<ExerciseDataModel> _displayedExercisesList;
 
 
         public ExerciseSelectViewModel()

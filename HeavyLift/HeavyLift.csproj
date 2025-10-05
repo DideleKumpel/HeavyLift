@@ -69,6 +69,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Helpers\" />
+	  <Folder Include="Resources\Data\" />
 	</ItemGroup>
 
 	<ItemGroup>

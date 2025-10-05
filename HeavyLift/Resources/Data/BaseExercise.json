@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Bench Press",
+    "description": "A compound exercise that targets the chest, shoulders, and triceps.",
+    "musclegroups": "Chest, Shoulders, Triceps",
+    "type": "Weight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Squat",
+    "description": "A compound exercise that targets the legs and glutes.",
+    "musclegroups": "Legs, Glutes",
+    "type": "Weight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Plank",
+    "description": "A core exercise that targets the abdominal muscles.",
+    "musclegroups": "ABS",
+    "type": "Time",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Treadmill",
+    "description": "A cardio exercise that targets the legs and cardiovascular system.",
+    "musclegroups": "Cardio",
+    "type": "Distance",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Pull-ups",
+    "description": "A bodyweight exercise that targets the back and biceps.",
+    "musclegroups": "Back, Biceps",
+    "type": "Bodyweight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Push-ups",
+    "description": "A bodyweight exercise that targets the chest, shoulders and triceps.",
+    "musclegroups": "Chest, Shoulders, Triceps",
+    "type": "Bodyweight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Yoga Stretch",
+    "description": "A flexibility exercise that improves mobility and relaxation.",
+    "musclegroups": "Full Body",
+    "type": "Flexibility",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Jump Rope",
+    "description": "A cardio exercise that improves coordination and endurance.",
+    "musclegroups": "Cardio, Legs",
+    "type": "Time",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Deadlift",
+    "description": "A compound exercise that targets the back, legs and glutes.",
+    "musclegroups": "Back, Legs, Glutes",
+    "type": "Weight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Bicep Curls",
+    "description": "An isolation exercise that targets the biceps.",
+    "musclegroups": "Biceps",
+    "type": "Weight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Leg Press",
+    "description": "A machine exercise that targets the legs and glutes.",
+    "musclegroups": "Legs, Glutes",
+    "type": "Weight",
+    "image": null,
+    "reps": null
+  },
+  {
+    "name": "Swimming",
+    "description": "A full body cardio exercise that improves endurance.",
+    "musclegroups": "Cardio, Full Body",
+    "type": "Time",
+    "image": null,
+    "reps": null
+  }
+]
