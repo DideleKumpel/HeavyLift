@@ -55,7 +55,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         [RelayCommand]
         private async Task AddExercise()
         {
-            await Shell.Current.GoToAsync(nameof(ExerciseSelectView));
+            await Shell.Current.GoToAsync("ExerciseSelectView", new Dictionary<string, object> { { "TrainingPlanModel", _trainingPlan } });
         }
     }
 }

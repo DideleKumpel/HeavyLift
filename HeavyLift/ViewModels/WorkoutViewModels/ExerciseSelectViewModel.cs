@@ -6,22 +6,47 @@ using System.Text;
 using System.Threading.Tasks;
 using HeavyLift.Models;
 using System.Collections.ObjectModel;
+using HeavyLift.Services;
+using CommunityToolkit.Mvvm.Input;
 
 namespace HeavyLift.ViewModels.WorkoutViewModels
 {
-    partial class ExerciseSelectViewModel : ObservableObject
+    public partial class ExerciseSelectViewModel : ObservableObject
     {
+        private readonly IServiceProvider _serviceProvider;
+        private readonly FileService _fileService;
         private TrainingPlanModel _trainingPlan;
+        public TrainingPlanModel TrainingPlan { set {
+                _trainingPlan = value;
+            } }
 
-        private ObservableCollection<ExerciseDataModel> exerciseList;
+        private ExerciseDataModel _exerciseList;
 
         [ObservableProperty]
         private ObservableCollection<ExerciseDataModel> _displayedExercisesList;
+        [ObservableProperty]
+        private string _searchText;
 
 
-        public ExerciseSelectViewModel()
+        public ExerciseSelectViewModel(IServiceProvider serviceProvider, FileService fileService)
         {
+            _fileService = fileService;
+            LoadExercises();
+        }
 
+        private async Task LoadExercises()
+        {
+            _exerciseList = new ExerciseDataModel
+            {
+                BaseExercises = await _fileService.LoadBaseExercisesAsync(),
+                CustomExercises = await _fileService.LoadCustomExercisesAsync()
+            };
+        }
+
+        [RelayCommand]
+        private void Test()
+        {
+            int abc = 2;
         }
     }
 }

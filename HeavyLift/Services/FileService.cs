@@ -1,36 +1,60 @@
-﻿using System.Text.Json;
-using HeavyLift.Models;
+﻿using HeavyLift.Models;
+using System.Diagnostics;
+using System.Reflection;
+using System.Text.Json;
 
 namespace HeavyLift.Services
 {
     public class FileService
     {
-        private const string BaseEcercisesFileName = "BaseExercises.json";
-        private const string CustomExercisesFileName = "CustomExercises.json";
+        private readonly string _customExercisesPath;
 
-        private string GetExerciseFilePath(bool isBase)
+        public FileService()
         {
-            var filename = isBase ? BaseEcercisesFileName : CustomExercisesFileName;
-            return Path.Combine(FileSystem.AppDataDirectory, filename);
+            _customExercisesPath = Path.Combine(FileSystem.AppDataDirectory, "custom_exercises.json");
         }
 
-        public async Task SaveExerciseToFileAsync(List<ExerciseModel> exercises)
+        public async Task<List<ExerciseModel>> LoadBaseExercisesAsync()
         {
-            var path = GetExerciseFilePath(false);  // User can save only custom exercises base exercise cannot be modfied
-            using var stream = File.Create(path);
-            await JsonSerializer.SerializeAsync(stream, exercises);
+            try
+            {
+                var assembly = Assembly.GetExecutingAssembly();
+                var resourceName = "HeavyLift.Resources.Data.BaseExercises.json";
+
+                using var stream = assembly.GetManifestResourceStream(resourceName);
+
+                if (stream == null)
+                    return new List<ExerciseModel>();
+
+                using var reader = new StreamReader(stream);
+                var json = await reader.ReadToEndAsync();
+
+                return JsonSerializer.Deserialize<List<ExerciseModel>>(json)
+                       ?? new List<ExerciseModel>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading base exercises: {ex.Message}");
+                return new List<ExerciseModel>();
+            }
         }
 
-        public async Task<List<ExerciseModel>> LoadExerciseFromFileAsync(bool isBase)
+        public async Task<List<ExerciseModel>> LoadCustomExercisesAsync()
         {
-            var path = GetExerciseFilePath(isBase);
-
-            if (!File.Exists(path))
+            if (!File.Exists(_customExercisesPath))
                 return new List<ExerciseModel>();
 
-            using var stream = File.OpenRead(path);
-            return await JsonSerializer.DeserializeAsync<List<ExerciseModel>>(stream)
-                   ?? new List<ExerciseModel>();
+            try
+            {
+                var json = await File.ReadAllTextAsync(_customExercisesPath);
+                return JsonSerializer.Deserialize<List<ExerciseModel>>(json)
+                       ?? new List<ExerciseModel>();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading custom exercises: {ex.Message}");
+                return new List<ExerciseModel>();
+            }
         }
     }
 }

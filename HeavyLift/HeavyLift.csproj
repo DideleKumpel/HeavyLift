@@ -69,7 +69,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Helpers\" />
-	  <Folder Include="Resources\Data\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -111,4 +110,10 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Data\BaseExercises.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+	
 </Project>
