@@ -1,4 +1,5 @@
 ﻿using HeavyLift.Models;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text.Json;
@@ -55,6 +56,14 @@ namespace HeavyLift.Services
                 Debug.WriteLine($"Error loading custom exercises: {ex.Message}");
                 return new List<ExerciseModel>();
             }
+        }
+
+        public async Task<List<ExerciseModel>> LoadAllExercise()
+        {
+            List<ExerciseModel> BaseExercise = await LoadBaseExercisesAsync();
+            List<ExerciseModel> CustomExercise = await LoadCustomExercisesAsync();
+            List<ExerciseModel> CombinedExercise = new List<ExerciseModel>(BaseExercise.Concat(CustomExercise));
+            return CombinedExercise;
         }
     }
 }

@@ -20,10 +20,10 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
                 _trainingPlan = value;
             } }
 
-        private ExerciseDataModel _exerciseList;
+        private ObservableCollection<ExerciseModel> _exerciseList;
 
         [ObservableProperty]
-        private ObservableCollection<ExerciseDataModel> _displayedExercisesList;
+        private ObservableCollection<ExerciseModel> _displayedExercisesList;
         [ObservableProperty]
         private string _searchText;
 
@@ -36,11 +36,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
 
         private async Task LoadExercises()
         {
-            _exerciseList = new ExerciseDataModel
-            {
-                BaseExercises = await _fileService.LoadBaseExercisesAsync(),
-                CustomExercises = await _fileService.LoadCustomExercisesAsync()
-            };
+            _exerciseList = new ObservableCollection<ExerciseModel>(await _fileService.LoadAllExercise());
         }
 
         [RelayCommand]

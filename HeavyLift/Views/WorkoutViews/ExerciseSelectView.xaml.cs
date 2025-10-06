@@ -3,6 +3,7 @@ using HeavyLift.ViewModels.WorkoutViewModels;
 
 namespace HeavyLift.Views.WorkoutViews;
 
+[QueryProperty(nameof(TrainingPlanModel), "TrainingPlanModel")]
 public partial class ExerciseSelectView : ContentPage
 {
     private readonly ExerciseSelectViewModel _viewModel;

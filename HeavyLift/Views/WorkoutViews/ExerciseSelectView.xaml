@@ -17,7 +17,7 @@
                     Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
                     Background="{StaticResource SecondaryBackgroundColor}">
                     <Entry Placeholder="Exercise name" PlaceholderColor="{StaticResource TextColor}"
-                        Text="{Binding }" TextColor="{StaticResource TextColor}" FontSize="16"
+                         TextColor="{StaticResource TextColor}" FontSize="16"
                     />
             </Border>
             <Grid>
@@ -33,5 +33,20 @@
                         Text="Muscles"/>
             </Grid>
         </VerticalStackLayout>
+        <ScrollView Grid.Row="1" Margin="20,0,20,20">
+            <VerticalStackLayout Spacing="10">
+                <CollectionView ItemsSource="{Binding Exercises}" SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:ExerciseModel">
+                            <Border Padding="10"
+                                    Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
+                                    Background="{StaticResource SecondaryBackgroundColor}">
+                                <Label Text="{Binding Name}" TextColor="{StaticResource TextColor}" FontSize="16"/>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>
