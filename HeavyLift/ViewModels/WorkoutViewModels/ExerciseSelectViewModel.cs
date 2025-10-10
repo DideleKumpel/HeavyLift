@@ -1,13 +1,15 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using HeavyLift.Models;
+using HeavyLift.Services;
+using HeavyLift.Views.DialogPopups;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HeavyLift.Models;
-using System.Collections.ObjectModel;
-using HeavyLift.Services;
-using CommunityToolkit.Mvvm.Input;
 
 namespace HeavyLift.ViewModels.WorkoutViewModels
 {
@@ -32,6 +34,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         {
             _fileService = fileService;
             LoadExercises();
+            _displayedExercisesList = new ObservableCollection<ExerciseModel>(_exerciseList);
         }
 
         private async Task LoadExercises()
@@ -43,6 +46,29 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         private void Test()
         {
             int abc = 2;
+        }
+
+        [RelayCommand]
+        private async Task AddExerciseToPlan(ExerciseModel exercise)
+        {
+            if (exercise == null)
+                return;
+            var result = await Application.Current.MainPage.ShowPopupAsync(new ConformationMessagePopup("Do you wanna add this exercise? \n" + exercise.name));
+            if (result is bool boolResoult)
+            {
+                if (boolResoult == true)
+                {
+                    exercise.reps = new ObservableCollection<RepModel>();
+                    _trainingPlan.plan.Add(exercise);
+                    await Shell.Current.GoToAsync("..");
+                }
+            }
+            else
+            {
+                return;
+            }
+            
+
         }
     }
 }

@@ -48,6 +48,30 @@
         </Setter>
     </Style>
 
+    <Style x:Key="MainButtonSmall" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
+        <Setter Property="TextColor" Value="{StaticResource TextColor}"/>
+        <Setter Property="FontSize" Value="Small"/>
+        <Setter Property="CornerRadius" Value="17"/>
+        <Setter Property="BorderWidth" Value="3" />
+        <Setter Property="BorderColor" Value="{StaticResource PrimaryColor}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Padding" Value="3,3"/>
+        <Setter Property="VisualStateManager.VisualStateGroups">
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal"/>
+                    <VisualState x:Name="Pressed">
+                        <VisualState.Setters>
+                            <Setter Property="Opacity" Value="0.75"/>
+                            <Setter Property="Scale" Value="0.95"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </Setter>
+    </Style>
+
     <Style x:Key="DangerButton" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBackgroundColor}"/>
         <Setter Property="TextColor" Value="{StaticResource TextColor}"/>

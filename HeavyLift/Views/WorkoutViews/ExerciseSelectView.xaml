@@ -6,6 +6,7 @@
              xmlns:model="clr-namespace:HeavyLift.Models" 
              x:DataType="viewmodel:ExerciseSelectViewModel"
              Title="Select exercise">
+    <Shell.TabBarIsVisible>False</Shell.TabBarIsVisible>
     <Grid BackgroundColor="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -35,14 +36,36 @@
         </VerticalStackLayout>
         <ScrollView Grid.Row="1" Margin="20,0,20,20">
             <VerticalStackLayout Spacing="10">
-                <CollectionView ItemsSource="{Binding Exercises}" SelectionMode="None">
+                <CollectionView ItemsSource="{Binding DisplayedExercisesList}" SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:ExerciseModel">
-                            <Border Padding="10"
-                                    Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
-                                    Background="{StaticResource SecondaryBackgroundColor}">
-                                <Label Text="{Binding Name}" TextColor="{StaticResource TextColor}" FontSize="16"/>
-                            </Border>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="74"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="70"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        NumberOfTapsRequired="2"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExerciseSelectViewModel}}, Path=AddExerciseToPlanCommand}"
+                                        CommandParameter="{Binding .}"/>
+                                </Grid.GestureRecognizers>
+                                <Border
+                                    HeightRequest="64" WidthRequest="64" Margin="0,0,10,0"
+                                    StrokeShape="RoundRectangle 32" StrokeThickness="0"
+                                    Background="{StaticResource White}">
+                                    <Image Source="no_picture.png" 
+                                        HeightRequest="64" WidthRequest="64"
+                                        Aspect="AspectFit"/>
+                                    
+                                </Border>
+                                <Label Grid.Column="1" Style="{StaticResource Big}" Text="{Binding name}" 
+                                       HeightRequest="64" VerticalTextAlignment="Center"/>
+                                <Button Grid.Column="2" Text="Add" Style="{StaticResource MainButtonSmall}" HeightRequest="30" WidthRequest="70"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:ExerciseSelectViewModel}}, Path=AddExerciseToPlanCommand}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
