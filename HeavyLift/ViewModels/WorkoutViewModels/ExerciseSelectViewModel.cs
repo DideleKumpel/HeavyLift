@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HeavyLift.Models;
+using HeavyLift.Models.Constants;
 using HeavyLift.Services;
 using HeavyLift.Views.DialogPopups;
 using System;
@@ -28,6 +29,12 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         private ObservableCollection<ExerciseModel> _displayedExercisesList;
         [ObservableProperty]
         private string _searchText;
+        [ObservableProperty]
+        private ObservableCollection<string> _muscleGroupsDisplay = new ObservableCollection<string>( MuscleGroups.AllGroups);
+        [ObservableProperty]
+        private string _selectedMuscleGroups;
+        [ObservableProperty]
+        private bool _selectMuscleGroupsVisible = false;
 
 
         public ExerciseSelectViewModel(IServiceProvider serviceProvider, FileService fileService)
@@ -43,16 +50,18 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         }
 
         [RelayCommand]
-        private void Test()
-        {
-            int abc = 2;
-        }
-
-        [RelayCommand]
         private async Task AddExerciseToPlan(ExerciseModel exercise)
         {
             if (exercise == null)
                 return;
+            for(int i =0; i<_trainingPlan.plan.Count(); i++)
+            {
+                if(exercise.name == _trainingPlan.plan[i].name)
+                {
+                    await Application.Current.MainPage.ShowPopupAsync(new MessagePopup(exercise.name +  " is already in this plan"));
+                    return;
+                }
+            }
             var result = await Application.Current.MainPage.ShowPopupAsync(new ConformationMessagePopup("Do you wanna add this exercise? \n" + exercise.name));
             if (result is bool boolResoult)
             {
@@ -68,6 +77,30 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
                 return;
             }
             
+
+        }
+
+        [RelayCommand]
+        private void OpenSelectMuscleGroupMenu()
+        {
+            SelectMuscleGroupsVisible = true;
+        }
+
+        [RelayCommand]
+        private void CloseSelectMuscleGroupMenu() 
+        {
+            SelectMuscleGroupsVisible = false;
+        }
+
+        [RelayCommand]
+        private void SelectMuscleGroupFilter(string muscleGroup)
+        {
+            SelectedMuscleGroups = muscleGroup;
+        }
+
+        [RelayCommand]
+        private void ApplyFilters()
+        {
 
         }
     }

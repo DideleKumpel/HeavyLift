@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HeavyLift.Views.WorkoutViews.ExerciseSelectView"
              xmlns:viewmodel="clr-namespace:HeavyLift.ViewModels.WorkoutViewModels"
-             xmlns:model="clr-namespace:HeavyLift.Models" 
+             xmlns:model="clr-namespace:HeavyLift.Models"
+             xmlns:constants="clr-namespace:HeavyLift.Models.Constants"
+             xmlns:customcontrols="clr-namespace:HeavyLift.CustomControls"
              x:DataType="viewmodel:ExerciseSelectViewModel"
              Title="Select exercise">
     <Shell.TabBarIsVisible>False</Shell.TabBarIsVisible>
@@ -13,7 +15,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <VerticalStackLayout Margin="20" Spacing="20">
-            <Label Style="{StaticResource Big}" Text="Search"/>
+            <Label Style="{StaticResource Big}" Text="Search" />
             <Border Padding="5"
                     Stroke="{StaticResource Secondary}" StrokeShape="RoundRectangle 30" StrokeThickness="4"
                     Background="{StaticResource SecondaryBackgroundColor}">
@@ -31,7 +33,8 @@
                         Command="{Binding TestCommand}"/>
 
                 <Button Grid.Column="2" Style="{StaticResource MainButton}" 
-                        Text="Muscles"/>
+                        Text="Muscles"
+                        Command="{Binding OpenSelectMuscleGroupMenuCommand}"/>
             </Grid>
         </VerticalStackLayout>
         <ScrollView Grid.Row="1" Margin="20,0,20,20">
@@ -71,5 +74,33 @@
                 </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
-    </Grid>
+        
+        <!-- muscle group selector !-->
+        <Grid Grid.RowSpan="2" VerticalOptions="End"  IsVisible="{Binding SelectMuscleGroupsVisible}"
+              >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="320"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" HeightRequest="500" Margin="-15, 0" Background="Transparent" Command="{Binding CloseSelectMuscleGroupMenuCommand}"/>
+            <Border  Grid.Row="1"
+                Background="{StaticResource BackgroundColor}"
+                StrokeThickness="4" StrokeShape="RoundRectangle 30,30,0,0" Stroke="{StaticResource PrimaryColor}"
+                Margin="-20,0,-20, -5"  Padding="15"
+                VerticalOptions="End" 
+                HeightRequest="400"
+                >
+                <ScrollView Margin="20,5">
+                    <CollectionView ItemsSource="{Binding MuscleGroupsDisplay}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <customcontrols:MainRadioButton Margin="0,10" Content="{Binding .}"/>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </Border>
+        </Grid>
+        
+     </Grid>
 </ContentPage>

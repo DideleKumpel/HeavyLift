@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="CustomControls\MainRadioButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\ColorsPalettesHeavyLift.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
