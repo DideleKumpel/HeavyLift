@@ -6,6 +6,7 @@
              xmlns:model="clr-namespace:HeavyLift.Models"
              xmlns:constants="clr-namespace:HeavyLift.Models.Constants"
              xmlns:customcontrols="clr-namespace:HeavyLift.CustomControls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:DataType="viewmodel:ExerciseSelectViewModel"
              Title="Select exercise">
     <Shell.TabBarIsVisible>False</Shell.TabBarIsVisible>
@@ -93,8 +94,21 @@
                 <ScrollView Margin="20,5">
                     <CollectionView ItemsSource="{Binding MuscleGroupsDisplay}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <customcontrols:MainRadioButton Margin="0,10" Content="{Binding .}"/>
+                            <DataTemplate x:DataType="x:String">
+                                <customcontrols:MainRadioButton x:Name="this"
+                                                                Margin="0,10" 
+                                                                GroupName="MuscleSelector"
+                                                                Content="{Binding .}"
+                                                                Value="{Binding .}">
+                                    
+                                    <customcontrols:MainRadioButton.Behaviors>
+                                        <toolkit:EventToCommandBehavior
+                                            EventName="CheckedChanged"
+                                            Command="{Binding SelectMuscleGroupFilterCommand}"
+                                            CommandParameter="{Binding Source={Reference this}}"/>
+                                    </customcontrols:MainRadioButton.Behaviors>
+                                    
+                                </customcontrols:MainRadioButton>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

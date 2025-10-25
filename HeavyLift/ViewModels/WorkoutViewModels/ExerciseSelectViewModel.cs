@@ -32,7 +32,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         [ObservableProperty]
         private ObservableCollection<string> _muscleGroupsDisplay = new ObservableCollection<string>( MuscleGroups.AllGroups);
         [ObservableProperty]
-        private string _selectedMuscleGroups;
+        private string _selectedMuscleGroups = "All";
         [ObservableProperty]
         private bool _selectMuscleGroupsVisible = false;
 
@@ -42,6 +42,7 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
             _fileService = fileService;
             LoadExercises();
             _displayedExercisesList = new ObservableCollection<ExerciseModel>(_exerciseList);
+            _muscleGroupsDisplay.Insert(0, "All");
         }
 
         private async Task LoadExercises()
@@ -93,15 +94,55 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         }
 
         [RelayCommand]
-        private void SelectMuscleGroupFilter(string muscleGroup)
+        private void SelectMuscleGroupFilter(object content)
         {
-            SelectedMuscleGroups = muscleGroup;
+            var radiobutton = content as RadioButton;
+
+            if(radiobutton == null)
+            {
+                return;
+            }
+
+            string muscleGroup = radiobutton.Value.ToString();
+
+            if (muscleGroup != null)
+            {
+                SelectedMuscleGroups = muscleGroup;
+                ApplyFilters();
+            }
         }
 
         [RelayCommand]
         private void ApplyFilters()
         {
-
+            DisplayedExercisesList.Clear();
+            foreach (var exercise in _exerciseList)
+            {
+                bool ContainsMucleGroup = false;
+                if( SelectedMuscleGroups != "All")
+                {
+                    if (exercise.musclegroups.Contains(SelectedMuscleGroups))
+                    {
+                        ContainsMucleGroup = true;
+                    }
+                }
+                bool FoundInSearch = false;
+                if (string.IsNullOrEmpty(_searchText))
+                {
+                    FoundInSearch = true;
+                }
+                else
+                {
+                    if (exercise.name.Contains(_searchText))
+                    {
+                        FoundInSearch = true;
+                    }
+                }
+                if(ContainsMucleGroup && FoundInSearch)
+                {
+                    DisplayedExercisesList.Add(exercise);
+                }
+            }
         }
     }
 }
