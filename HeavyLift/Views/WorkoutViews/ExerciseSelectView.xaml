@@ -10,7 +10,8 @@
              x:DataType="viewmodel:ExerciseSelectViewModel"
              Title="Select exercise">
     <Shell.TabBarIsVisible>False</Shell.TabBarIsVisible>
-    <Grid BackgroundColor="{StaticResource BackgroundColor}">
+    <Grid x:Name="ExerciseSelectViewGrid"
+        BackgroundColor="{StaticResource BackgroundColor}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -95,7 +96,7 @@
                     <CollectionView ItemsSource="{Binding MuscleGroupsDisplay}" SelectionMode="None">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="x:String">
-                                <customcontrols:MainRadioButton x:Name="this"
+                                <customcontrols:MainRadioButton x:Name="MuscleGroupSelect"
                                                                 Margin="0,10" 
                                                                 GroupName="MuscleSelector"
                                                                 Content="{Binding .}"
@@ -104,8 +105,8 @@
                                     <customcontrols:MainRadioButton.Behaviors>
                                         <toolkit:EventToCommandBehavior
                                             EventName="CheckedChanged"
-                                            Command="{Binding SelectMuscleGroupFilterCommand}"
-                                            CommandParameter="{Binding Source={Reference this}}"/>
+                                            Command="{Binding BindingContext.SelectMuscleGroupFilterCommand, Source={x:Reference ExerciseSelectViewGrid}}"
+                                            CommandParameter="{Binding BindingContext, Source={x:Reference MuscleGroupSelect}}"/>
                                     </customcontrols:MainRadioButton.Behaviors>
                                     
                                 </customcontrols:MainRadioButton>

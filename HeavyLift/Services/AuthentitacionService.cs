@@ -42,7 +42,7 @@ namespace HeavyLift.Services
                     return (false, "Login failed: Wrong e-mail or password");
                 }
             }
-            catch
+            catch(Exception e)
             { 
                 return (false, "Login failed: An error occurred while connecting to the server");
             }

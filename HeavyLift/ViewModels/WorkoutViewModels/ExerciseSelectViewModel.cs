@@ -94,20 +94,15 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
         }
 
         [RelayCommand]
-        private void SelectMuscleGroupFilter(object content)
+        private void SelectMuscleGroupFilter(string content)
         {
-            var radiobutton = content as RadioButton;
-
-            if(radiobutton == null)
+            if(string.IsNullOrEmpty(content))
             {
                 return;
             }
-
-            string muscleGroup = radiobutton.Value.ToString();
-
-            if (muscleGroup != null)
+            else
             {
-                SelectedMuscleGroups = muscleGroup;
+                SelectedMuscleGroups = content;
                 ApplyFilters();
             }
         }
@@ -125,6 +120,10 @@ namespace HeavyLift.ViewModels.WorkoutViewModels
                     {
                         ContainsMucleGroup = true;
                     }
+                }
+                else
+                {
+                    ContainsMucleGroup = true;
                 }
                 bool FoundInSearch = false;
                 if (string.IsNullOrEmpty(_searchText))
